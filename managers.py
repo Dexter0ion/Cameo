@@ -85,7 +85,7 @@ class CaptureManager(object):
             self._startTime = time.time()
         else:
             timeElapsed = time.time() - self._startTime
-            self._fpsEstimate = self._frameElapsed/time
+            self._fpsEstimate = self._frameElapsed/timeElapsed
 
         self._frameElapsed += 1
 
@@ -95,7 +95,7 @@ class CaptureManager(object):
         if self.preiviewWindowManager is not None:
             if self.shouldMirrorPreview:
                 # 镜像反转 Flip array in the left/right direction.
-                mirroredFrame = np.filpr(self._frame).copy()
+                mirroredFrame = np.fliplr(self._frame).copy()
                 self.preiviewWindowManager.show(mirroredFrame)
             else:
                 self.preiviewWindowManager.show(self._frame)
